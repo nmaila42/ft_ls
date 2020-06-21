@@ -62,8 +62,10 @@ int    parse_paths(char **av, char **files, char **directory, int i)
                 d++;
             }
             else
-                files[f++] = av[i];
-            
+            {
+                files[f] = av[i];
+                f++;
+            }
         }
         i++;
     }
@@ -71,6 +73,7 @@ int    parse_paths(char **av, char **files, char **directory, int i)
     directory[d] = NULL;
     return(err);
 }
+
 void    parse(int ac, char **av, char *flags, char **files, char **direct)
 {  
     int i;
@@ -80,11 +83,14 @@ void    parse(int ac, char **av, char *flags, char **files, char **direct)
     i = parse_flags(ac, av, flags);
     err = parse_paths(av, files, direct, i);
     if (!files[0] && !direct[0])
+    {
         if (err == 1)
         {
             direct[0] = ".";
             direct[1] = NULL;
         }
+    }
+
 }
 
 int     main(int ac, char **av)
@@ -92,8 +98,9 @@ int     main(int ac, char **av)
     char    flags[6];
     char    *files[1024];
     char    *direct[1024];
-    int    i;
+    int     i;
 
+    i = 0;
     parse(ac, av, flags, files, direct);
     
     ft_sort(files, flags);

@@ -1,6 +1,8 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
+//# define st_mtime st_mtim.tv_sec
+
 # include "libft/libft.h"
 # include <dirent.h>
 # include <sys/stat.h>
@@ -8,6 +10,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <unistd.h>
 # include <pwd.h>
 # include <grp.h>
 # include <errno.h>
