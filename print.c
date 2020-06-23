@@ -3,7 +3,13 @@
 void print_2d_array(char **array)
 {
     while (*array)
-        ft_putendl(ft_strrchr(*array++, '/') + 1);
+    {
+        if (ft_strrchr(*array, '/'))
+            ft_putendl(ft_strrchr(*array++, '/') + 1);
+        else
+            ft_putendl(*array++);
+
+    }
 }
 
 void    print_type(struct stat filestat)
@@ -104,7 +110,10 @@ void    print_long_format(char **files)
         printf_size(filestat);
         printf_time(filestat);
         ft_putstr("   ");
-        ft_putendl(ft_strrchr(*files, '/') + 1);
+        if (ft_strrchr(*files, '/'))
+            ft_putendl(ft_strrchr(*files, '/') + 1);
+        else
+            ft_putendl(*files);
         files++;
     }
 }
