@@ -44,7 +44,7 @@ void        sort_t(char **filename)
        j = 0;
         while (j+1 < i)
         {
-            if (files[j].st_mtime <files[j+1].st_mtime)
+            if (files[j].st_mtim.tv_sec <files[j+1].st_mtim.tv_sec)
             {
                 ft_swap(&filename[j], &filename[j+1]);
                 temp = files[j];
@@ -52,14 +52,14 @@ void        sort_t(char **filename)
                 files[j+1] = temp; 
             }
             // if they are created at the same time
-            // if (files[j].st_mtime == files[j+1].st_mtime)
-            //     if (files[j].st_mtim.tv_nsec < files[j+1].st_mtim.tv_nsec)
-            //     {
-            //         ft_swap(&filename[j], &filename[j+1]);
-            //         temp = files[j];
-            //         files[j] = files[j+1];
-            //         files[j+1] = temp; 
-            //     }
+            if (files[j].st_mtim.tv_sec == files[j+1].st_mtim.tv_sec)
+                if (files[j].st_mtim.tv_nsec < files[j+1].st_mtim.tv_nsec)
+                {
+                    ft_swap(&filename[j], &filename[j+1]);
+                    temp = files[j];
+                    files[j] = files[j+1];
+                    files[j+1] = temp; 
+                }
             j++;
         }
         k++;
